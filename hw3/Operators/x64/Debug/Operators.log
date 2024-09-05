@@ -1,0 +1,5 @@
+﻿  Operators.cpp
+C:\Users\Oleksandr\Desktop\itstep\C++ITStep\hw3\Operators.cpp(19,14): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Oleksandr\Desktop\itstep\C++ITStep\hw3\Operators.cpp(54,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Oleksandr\Desktop\itstep\C++ITStep\hw3\Operators.cpp(66,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Operators.vcxproj -> C:\Users\Oleksandr\Desktop\itstep\C++ITStep\hw3\x64\Debug\Operators.exe
