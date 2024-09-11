@@ -1,0 +1,4 @@
+﻿  TasksOperators(hw4).cpp
+C:\Users\Oleksandr\Desktop\itstep\C++ITStep\TasksOperators(hw4)\TasksOperators(hw4).cpp(88,24): warning C4305: '*=': truncation from 'double' to 'float'
+C:\Users\Oleksandr\Desktop\itstep\C++ITStep\TasksOperators(hw4)\TasksOperators(hw4).cpp(152,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  TasksOperators(hw4).vcxproj -> C:\Users\Oleksandr\Desktop\itstep\C++ITStep\TasksOperators(hw4)\x64\Debug\TasksOperators(hw4).exe
