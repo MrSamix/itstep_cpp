@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\itstep_cpp\\if_else_hw6\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F144FC29-742F-4243-BE43-6E46AE1EA89B}|if_else_hw6.vcxproj|C:\\Users\\User\\Desktop\\itstep_cpp\\if_else_hw6\\if_else_hw6.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F144FC29-742F-4243-BE43-6E46AE1EA89B}|if_else_hw6.vcxproj|solutionrelative:if_else_hw6.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "if_else_hw6.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\itstep_cpp\\if_else_hw6\\if_else_hw6.cpp",
+              "RelativeDocumentMoniker": "if_else_hw6.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\itstep_cpp\\if_else_hw6\\if_else_hw6.cpp",
+              "RelativeToolTip": "if_else_hw6.cpp",
+              "ViewState": "AgIAACAAAAAAAAAAAAAqwEIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-12T08:05:02.602Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
