@@ -65,4 +65,52 @@ int main()
             break;
     }
     // Task 3
+    int income, delays, linesOfCode, choice;
+    int salaryPerLine = 50;
+    int penaltyPerDelay = 20;
+    
+    cout << "Menu:\n";
+    cout << "1. Calculate the number of lines of code Vasya needs to write based on desired income and number of delays." << endl;
+    cout << "2. Calculate the number of delays Vasya can have based on the number of lines of code written and desired salary." << endl;
+    cout << "3. Calculate the amount of money Vasya will be paid and determine if he will be paid at all based on the number oflines of     code and delays." << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+    
+    switch (choice)
+    {
+        case 1:
+            cout << "Enter the desired income: ";
+            cin >> income;
+            cout << "Enter the number of delays: ";
+            cin >> delays;
+            linesOfCode = (income / salaryPerLine) * 100 - (delays / 3) * 100;
+            cout << "Vasya needs to write " << linesOfCode << " lines of code." << endl;
+            break;
+        case 2:
+            cout << "Enter the number of lines of code written by Vasya: ";
+            cin >> linesOfCode;
+            cout << "Enter the desired salary: ";
+            cin >> income;
+            delays = ((linesOfCode / 100) * salaryPerLine - income) / (salaryPerLine * 100 / 3);
+            cout << "Vasya can have " << delays << " delays." << endl;
+            break;
+        case 3:
+            cout << "Enter the number of lines of code: ";
+            cin >> linesOfCode;
+            cout << "Enter the number of delays: ";
+            cin >> delays;
+            income = (linesOfCode / 100) * salaryPerLine - (delays / 3) * penaltyPerDelay;
+            if (income >= 0)
+            {
+                cout << "Vasya will be paid $" << income << "." << endl;
+            }
+            else
+            {
+                cout << "Vasya will not be paid." << endl;
+            }
+            break;
+        default:
+            cout << "Invalid choice." << endl;
+            break;
+    }
 }
