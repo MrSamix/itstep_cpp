@@ -44,19 +44,40 @@ int sum_range(int num_start, int num_end)
 // Task 3
 void perfect_numbers_in_range(int start, int stop)
 {
-	for (int i = start; i < stop; i++)
+	if (start < stop) // перевірка на правильність введеного діапазону
 	{
-		int sum = 0;
-		for (int j = 1; j < i; j++)
+		for (int i = start; i < stop; i++)
 		{
-			if (i % j == 0)
+			int sum = 0;
+			for (int j = 1; j < i; j++)
 			{
-				sum += j;
+				if (i % j == 0)
+				{
+					sum += j;
+				}
+			}
+			if (sum == i)
+			{
+				cout << i << " is a perfect number" << endl;
 			}
 		}
-		if (sum == i)
+	}
+	else
+	{
+		for (int i = stop; i < start; i++)
 		{
-			cout << i << " is a perfect number" << endl;
+			int sum = 0;
+			for (int j = 1; j < i; j++)
+			{
+				if (i % j == 0)
+				{
+					sum += j;
+				}
+			}
+			if (sum == i)
+			{
+				cout << i << " is a perfect number" << endl;
+			}
 		}
 	}
 }
@@ -64,25 +85,46 @@ void perfect_numbers_in_range(int start, int stop)
 // Task 4
 void card(string suit, int power)
 {
-	if (suit == "Spades")
+    if (suit == "Spades")
+    {
+        cout << "Suit = ♠, power = " << power << endl;
+    }
+    else if (suit == "Clubs")
+    {
+        cout << "Suit = ♣, power = " << power << endl;
+    }
+    else if (suit == "Diamonds")
+    {
+        cout << "Suit = ♦, power = " << power << endl;
+    }
+    else if (suit == "Hearts")
+    {
+        cout << "Suit = ♥, power = " << power << endl;
+    }
+    else
+    {
+        cout << "Invalid input!" << endl;
+    }
+}
+
+// Task 5
+bool isluckynumber(int num)
+{
+	int digit_1 = (num / 100000) % 10;
+	int digit_2 = (num / 10000) % 10;
+	int digit_3 = (num / 1000) % 10;
+	int digit_4 = (num / 100) % 10;
+	int digit_5 = (num / 10) % 10;
+	int digit_6 = num % 10;
+	int sum_start_3 = digit_1 + digit_2 + digit_3;
+	int sum_end_3 = digit_4 + digit_5 + digit_6;
+	if (sum_start_3 == sum_end_3)
 	{
-		cout << "Suit = \u2660, power = " << power << endl; // Unicode for ♠
-	}
-	else if (suit == "Clubs")
-	{
-		cout << "Suit = \u2663, power = " << power << endl; // Unicode for ♣
-	}
-	else if (suit == "Diamonds")
-	{
-		cout << "Suit = \u2666, power = " << power << endl; // Unicode for ♦
-	}
-	else if (suit == "Hearts")
-	{
-		cout << "Suit = L\u2665, power = " << power << endl; // Unicode for ♥
+		return true;
 	}
 	else
 	{
-		cout << "Invalid input!" << endl;
+		return false;
 	}
 }
 
@@ -90,7 +132,7 @@ int main()
 {
 
 	// Task 1
-	cout << exponentiation(2, 2) << endl;
+	cout << "Result = " << exponentiation(2, 2) << endl;
 
 	// Task 2
 	int sum = sum_range(2, 5);
@@ -106,4 +148,18 @@ int main()
 
 	// Task 4
 	card("Spades", 6);
+	card("Clubs", 8);
+	card("Diamonds", 10);
+	card("Hearts", 9);
+
+	// Task 5
+	bool res = isluckynumber(123321);
+	if (res)
+	{
+		cout << "This number is lucky!" << endl;
+	}
+	else
+	{
+		cout << "This number is not lucky!" << endl;
+	}
 }
