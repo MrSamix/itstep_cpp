@@ -29,6 +29,20 @@ int searchArray(T arr[], int count_of_elements, T key)
 {
 	for (int i = 0; i < count_of_elements; i++)
 	{
+		if (arr[i] == key)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+// char(Task 3)
+int searchArray(char arr[], int count_of_elements, char key)
+{
+	for (int i = 0; i < count_of_elements; i++)
+	{
 		if (arr[i] >= 'A' && arr[i] <= 'Z')
 		{
 			arr[i] = arr[i] + 32;
@@ -44,17 +58,11 @@ int searchArray(T arr[], int count_of_elements, T key)
 	return -1;
 }
 
+
 // Task 4
 template <typename T>
 int searchArray2(T arr[], int count_of_elements, T key)
 {
-	for (int i = 0; i < count_of_elements; i++)
-	{
-		if (arr[i] >= 'A' && arr[i] <= 'Z')
-		{
-			arr[i] = arr[i] + 32;
-		}
-	}
 	for (int i = count_of_elements-1; i >= 0; i--)
 	{
 		if (arr[i] == key)
@@ -64,6 +72,29 @@ int searchArray2(T arr[], int count_of_elements, T key)
 	}
 	return -1;
 }
+
+
+// char task 4
+int searchArray2(char arr[], int count_of_elements, char key)
+{
+	for (int i = 0; i < count_of_elements; i++)
+	{
+		if (arr[i] >= 'A' && arr[i] <= 'Z')
+		{
+			arr[i] = arr[i] + 32;
+		}
+	}
+	for (int i = count_of_elements - 1; i >= 0; i--)
+	{
+		if (arr[i] == key)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+
 
 // Task 5
 template <typename T>
