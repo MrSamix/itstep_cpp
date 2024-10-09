@@ -107,11 +107,47 @@ void counter_words(char* str)
 
 
 // Task 7
-void max_word(char* str)
+char* max_word(char* str)
+{
+    int index = 0;
+    int max = 0;
+    int counter = 0;
+    for (size_t i = 0; i < strlen(str); i++)
+    {
+        if (isalpha(str[i]))
+        {
+            counter++;
+        }
+        else
+        {
+            if (max < counter)
+            {
+                max = counter;
+                index = i;
+            }
+            counter = 0;
+        }
+    }
+    cout << max << endl;
+    index -= max;
+    cout << index - max << endl;
+
+    char* res = new char[max + 1];
+    for (size_t i = 0; i < max; i++)
+    {
+        res[i] = str[index++];
+    }
+    res[max] = '\0';
+    return res;
+}
+
+// Task 8
+void avg_bukvs_in_str(char* str)
 {
     int length = strlen(str);
+    int sum = 0;
+    float avg;
     int counter_words = 0, counter_bukvs = 0;
-    //counter
     for (int i = 0; i < length; i++)
     {
         if (isalpha(str[i]))
@@ -123,52 +159,32 @@ void max_word(char* str)
             if (counter_bukvs > 1)
             {
                 counter_words++;
+                sum += counter_bukvs;
                 counter_bukvs = 0;
             }
         }
     }
-    char* arr = new char[counter_words];
+    avg = (float) sum / counter_words;
+    cout << "Avg = " << avg << endl;
+}
 
-    // write array
-    int start_index = 0, end_index = 0;
-    for (int i = 0; i < length; i++)
+
+
+// Task 9
+void findChar(char* str, char ch)
+{
+    int count = 0;
+    cout << "Indexes " << ch << " : ";
+    for (int i = 0; str[i] != '\0'; i++)
     {
-        if (isalpha(str[i]))
+        if (str[i] == ch)
         {
-            if (i == 0)
-            {
-                start_index = 0;
-            }
-            else if (counter_bukvs == 0)
-            {
-                start_index = i;
-            }
-            counter_bukvs++;
-        }
-        else
-        {
-            end_index = i - 1;
-            char* arr_word = new char[counter_bukvs];
-            for (int i = 0; i < counter_bukvs; i++)
-            {
-                if (start_index <= end_index)
-                {
-                    arr_word[i] = arr[start_index++];
-                }
-            }
-            arr_word[counter_bukvs] = '\0';
-
-            for (int i = 0; i < counter_words; i++)
-            {
-                if (counter_bukvs > 1)
-                {
-                    arr[i] = arr_word;
-                    counter_bukvs = 0;
-                }
-            }
+            cout << i << " ";
+            count++;
         }
     }
-    /*cout << "Count of str: " << str << " = " << counter_words << endl;*/
+    cout << endl;
+    cout << "Count of " << ch << " = " << count << endl;
 }
 
 int main()
@@ -200,4 +216,16 @@ int main()
     // Task 6
     char str_6[] = "Hello, world!";
     counter_words(str_6);
+
+    // Task 7
+    char str_7[] = "Hello, worlds!";
+    cout << max_word(str_7) << endl;
+
+    // Task 8
+    char str_8[] = "Hellog, world!";
+    avg_bukvs_in_str(str_8);
+
+    // Task 9
+	char str_9[] = "Hello, world!";
+	findChar(str_9, 'o');
 }
