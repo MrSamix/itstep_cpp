@@ -1,0 +1,6 @@
+======================== STATS ==========================
+Count of symbols: 231
+Count of lines: 4
+Count of vowel letters: 81
+Count of consonant letters: 112
+Count of digits: 0
