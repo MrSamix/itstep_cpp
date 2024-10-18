@@ -32,7 +32,7 @@ int countSize(fstream& file)
 	int bytes = 0;
 	file.seekg(0, ios_base::end);
 	bytes = file.tellg();
-	cout << bytes << endl;
+	/*cout << bytes << endl;*/
 
 	/*cout << "bytes = " << bytes << endl;*/
 	int size = bytes / sizeof(Book);
@@ -45,7 +45,7 @@ int countSize2(fstream& file)
 	int bytes = 0;
 	file.seekg(0, ios_base::end);
 	bytes = file.tellg();
-	cout << bytes << endl;
+	//cout << bytes << endl;
 
 	/*cout << "bytes = " << bytes << endl;*/
 	int size = bytes / sizeof(Journal);
@@ -85,7 +85,7 @@ void printDBBook(fstream& file)
 	for (int i = 0; i < read_size; i++)
 	{
 		file.read((char*)&library_book_read[i], sizeof(Book));
-		cout << "\n\n ========================================== " << library_book_read[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_book_read[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Author: " << library_book_read[i].author << endl;
 		cout << "\t\t Publisher: " << library_book_read[i].publisher << endl;
@@ -117,7 +117,7 @@ void deleteBook(fstream& file)
 	for (int i = 0; i < read_size_4; i++)
 	{
 		file.read((char*)&library_book_read_4[i], sizeof(Book));
-		cout << "\n\n ========================================== " << library_book_read_4[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_book_read_4[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Author: " << library_book_read_4[i].author << endl;
 		cout << "\t\t Publisher: " << library_book_read_4[i].publisher << endl;
@@ -155,7 +155,7 @@ void deleteBook(fstream& file)
 
 bool compareBooks(const Book& book1, const Book& book2)
 {
-	return strcmp(book1.name, book2.name) < 0; // глюк бо воно порівнює по першому символу і маленькі букви більші за великі
+	return strcmp(book1.name, book2.name) > 0;
 }
 
 void bubbleSort(Book* books, int size)
@@ -182,13 +182,12 @@ void sortDBBook(fstream& file)
 		file.read((char*)&library_book_read_5[i], sizeof(Book));
 	}
 	file.close();
-	// Sort the books by name using bubble sort
+
 	bubbleSort(library_book_read_5, read_size_5);
 
-	// Print the sorted books
 	for (int i = 0; i < read_size_5; i++)
 	{
-		cout << "\n\n ========================================== " << library_book_read_5[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_book_read_5[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Author: " << library_book_read_5[i].author << endl;
 		cout << "\t\t Publisher: " << library_book_read_5[i].publisher << endl;
@@ -229,7 +228,7 @@ void searchDBBook(fstream& file)
 		{
 			search = true;
 			cout << "Searched: " << endl << endl;
-			cout << "\n\n ========================================== " << library_book_read_6[i].name << "======================================== \n";
+			cout << "\n\n ========================================== " << library_book_read_6[i].name << " ======================================== \n";
 			cout << "\t\t Index: " << i << endl;
 			cout << "\t\t Author: " << library_book_read_6[i].author << endl;
 			cout << "\t\t Publisher: " << library_book_read_6[i].publisher << endl;
@@ -264,7 +263,7 @@ void vibyrkaDBBook(fstream& file)
 		{
 			if (library_book_read_7[i].author == author_7)
 			{
-				cout << "\n\n ========================================== " << library_book_read_7[i].name << "======================================== \n";
+				cout << "\n\n ========================================== " << library_book_read_7[i].name << " ======================================== \n";
 				cout << "\t\t Index: " << i << endl;
 				cout << "\t\t Author: " << library_book_read_7[i].author << endl;
 				cout << "\t\t Publisher: " << library_book_read_7[i].publisher << endl;
@@ -280,7 +279,7 @@ void vibyrkaDBBook(fstream& file)
 		{
 			if (library_book_read_7[i].genre == genre_7)
 			{
-				cout << "\n\n ========================================== " << library_book_read_7[i].name << "======================================== \n";
+				cout << "\n\n ========================================== " << library_book_read_7[i].name << " ======================================== \n";
 				cout << "\t\t Index: " << i << endl;
 				cout << "\t\t Author: " << library_book_read_7[i].author << endl;
 				cout << "\t\t Publisher: " << library_book_read_7[i].publisher << endl;
@@ -343,7 +342,7 @@ void printDBJournal(fstream& file)
 	for (int i = 0; i < read_size; i++)
 	{
 		file.read((char*)&library_book_journal[i], sizeof(Journal));
-		cout << "\n\n ========================================== " << library_book_journal[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_book_journal[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Year: " << library_book_journal[i].year << endl;
 	}
@@ -369,7 +368,7 @@ void deleteJournal(fstream& file)
 	for (int i = 0; i < read_size_4; i++)
 	{
 		file.read((char*)&library_journal_read_4[i], sizeof(Journal));
-		cout << "\n\n ========================================== " << library_journal_read_4[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_journal_read_4[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Year: " << library_journal_read_4[i].year << endl;
 	}
@@ -403,7 +402,7 @@ void deleteJournal(fstream& file)
 // Task 5
 bool compareJournals(const Journal& journal1, const Journal& journal2)
 {
-	return strcmp(journal1.name, journal2.name) < 0; // глюк бо воно порівнює по першому символу і маленькі букви більші за великі
+	return strcmp(journal1.name, journal2.name) > 0;
 }
 
 void bubbleSort(Journal* journals, int size)
@@ -429,13 +428,13 @@ void sortDBJournal(fstream& file)
 		file.read((char*)&library_journal_read_5[i], sizeof(Journal));
 	}
 	file.close();
-	// Sort the journals by name using bubble sort
+	
 	bubbleSort(library_journal_read_5, read_size_5);
 
-	// Print the sorted journals
+	
 	for (int i = 0; i < read_size_5; i++)
 	{
-		cout << "\n\n ========================================== " << library_journal_read_5[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_journal_read_5[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Year: " << library_journal_read_5[i].year << endl;
 	}
@@ -472,7 +471,7 @@ void searchDBJournal(fstream& file)
 		{
 			search = true;
 			cout << "Searched: " << endl << endl;
-			cout << "\n\n ========================================== " << library_journal_read_6[i].name << "======================================== \n";
+			cout << "\n\n ========================================== " << library_journal_read_6[i].name << " ======================================== \n";
 			cout << "\t\t Index: " << i << endl;
 			cout << "\t\t Year: " << library_journal_read_6[i].year << endl;
 		}
@@ -502,7 +501,7 @@ void vibyrkaDBJournal(fstream& file)
 		if (library_journal_read_7[i].name == journal_7)
 		{
 			search = true;
-			cout << "\n\n ========================================== " << library_journal_read_7[i].name << "======================================== \n";
+			cout << "\n\n ========================================== " << library_journal_read_7[i].name << " ======================================== \n";
 			cout << "\t\t Index: " << i << endl;
 			cout << "\t\t Year: " << library_journal_read_7[i].year << endl;
 		}
@@ -541,7 +540,7 @@ void printDBNewspaper(fstream& file)
 	for (int i = 0; i < read_size; i++)
 	{
 		file.read((char*)&library_book_newspaper[i], sizeof(Newspaper));
-		cout << "\n\n ========================================== " << library_book_newspaper[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_book_newspaper[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Year: " << library_book_newspaper[i].year << endl;
 	}
@@ -567,7 +566,7 @@ void deleteNewspaper(fstream& file)
 	for (int i = 0; i < read_size_4; i++)
 	{
 		file.read((char*)&library_newspaper_read_4[i], sizeof(Newspaper));
-		cout << "\n\n ========================================== " << library_newspaper_read_4[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_newspaper_read_4[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Year: " << library_newspaper_read_4[i].year << endl;
 	}
@@ -601,7 +600,7 @@ void deleteNewspaper(fstream& file)
 // Task 5
 bool compareNewspapers(const Newspaper& newspaper1, const Newspaper& newspaper2)
 {
-	return strcmp(newspaper1.name, newspaper2.name) < 0; // глюк бо воно порівнює по першому символу і маленькі букви більші за великі
+	return strcmp(newspaper1.name, newspaper2.name) > 0; // Compare in reverse order
 }
 
 void bubbleSort(Newspaper* newspapers, int size)
@@ -627,13 +626,13 @@ void sortDBNewspaper(fstream& file)
 		file.read((char*)&library_newspaper_read_5[i], sizeof(Newspaper));
 	}
 	file.close();
-	// Sort the journals by name using bubble sort
+	
 	bubbleSort(library_newspaper_read_5, read_size_5);
 
-	// Print the sorted journals
+	
 	for (int i = 0; i < read_size_5; i++)
 	{
-		cout << "\n\n ========================================== " << library_newspaper_read_5[i].name << "======================================== \n";
+		cout << "\n\n ========================================== " << library_newspaper_read_5[i].name << " ======================================== \n";
 		cout << "\t\t Index: " << i << endl;
 		cout << "\t\t Year: " << library_newspaper_read_5[i].year << endl;
 	}
@@ -669,7 +668,7 @@ void searchDBNewspaper(fstream& file)
 		{
 			search = true;
 			cout << "Searched: " << endl << endl;
-			cout << "\n\n ========================================== " << library_newspaper_read_6[i].name << "======================================== \n";
+			cout << "\n\n ========================================== " << library_newspaper_read_6[i].name << " ======================================== \n";
 			cout << "\t\t Index: " << i << endl;
 			cout << "\t\t Year: " << library_newspaper_read_6[i].year << endl;
 		}
@@ -760,10 +759,8 @@ int main()
 	case 'b':
 	{
 		fstream file("books.txt", ios_base::out | ios_base::in);
-		/*file.open("books.txt");*/
 		if (!file.is_open())
 		{
-			/*cout << "error opening file books.txt" << endl;*/
 			cout << "This file don't exist, create?(y/n): ";
 			char choice_create;
 			cin >> choice_create;
@@ -787,7 +784,7 @@ int main()
 			cout << "4. Delete book" << endl;
 			cout << "5. Sort books" << endl;
 			cout << "6. Search book" << endl;
-			cout << "7. Vibyrka books" << endl;
+			cout << "7. Search all books by author" << endl;
 			cout << "8. Count books" << endl;
 			cout << "-1. Exit program" << endl;
 			cout << "Enter a number: "; cin >> choice_b;
@@ -861,164 +858,182 @@ int main()
 	}
 	case 'j':
 	{
-		fstream file_j("journals.txt", ios_base::out | ios_base::in | ios_base::app); // написати як в книжці
+		fstream file_j("journals.txt", ios_base::out | ios_base::in);
 		if (!file_j.is_open())
 		{
-			cout << "Error, file don't open" << endl;
-		}
-		else
-		{
-			int choice_j = 0;
-			while (choice_j != -1)
+			cout << "This file don't exist, create?(y/n): ";
+			char choice_create;
+			cin >> choice_create;
+			if (choice_create == 'y')
 			{
-				cout << "1. Fill db by journals" << endl;
-				cout << "2. Print journals" << endl;
-				cout << "3. Add journal" << endl;
-				cout << "4. Delete journal" << endl;
-				cout << "5. Sort journals" << endl;
-				cout << "6. Search journal" << endl;
-				cout << "7. Vibyrka jorunals" << endl;
-				cout << "-1. Exit program" << endl;
-				cout << "Enter a number: "; cin >> choice_j;
-				switch (choice_j)
-				{
-				case 1:
-				{
-					checkFileIsOpen(file_j, "journals.txt");
-					fillDBJournal(file_j);
-					file_j.close();
-					break;
-				}
-				case 2:
-				{
-					checkFileIsOpen(file_j, "journals.txt", true, true, true);
-					printDBJournal(file_j);
-					file_j.close();
-					break;
-				}
-				case 3:
-				{
-					checkFileIsOpen(file_j, "journals.txt", true, true, true);
-					addnewJournal(file_j);
-					file_j.close();
-					break;
-				}
-				case 4:
-				{
-					checkFileIsOpen(file_j, "journals.txt", true, true, true);
-					deleteJournal(file_j);
-					file_j.close();
-					break;
-				}
-				case 5:
-				{
-					checkFileIsOpen(file_j, "journals.txt", true, true, true);
-					sortDBJournal(file_j);
-					break;
-				}
-				case 6:
-				{
-					checkFileIsOpen(file_j, "journals.txt", true, true, true);
-					searchDBJournal(file_j);
-					break;
-				}
-				case 7:
-				{
-					checkFileIsOpen(file_j, "journals.txt", true, true, true);
-					vibyrkaDBJournal(file_j);
-					break;
-				}
-				case -1:
-				{
-					break;
-				}
-				default:
-					cout << "Error number, press -1 to exit program" << endl;
-					break;
-				}
+				fstream create_file("journals.txt", ios_base::app); // створюю файл
+				create_file.close();
+			}
+			else
+			{
+				cout << "Exiting..." << endl;
+				break;
+			}
+		}
+		int choice_j = 0;
+		while (choice_j != -1)
+		{
+			cout << "1. Fill db by journals" << endl;
+			cout << "2. Print journals" << endl;
+			cout << "3. Add journal" << endl;
+			cout << "4. Delete journal" << endl;
+			cout << "5. Sort journals" << endl;
+			cout << "6. Search journal" << endl;
+			cout << "7. Vibyrka jorunals" << endl;
+			cout << "-1. Exit program" << endl;
+			cout << "Enter a number: "; cin >> choice_j;
+			switch (choice_j)
+			{
+			case 1:
+			{
+				checkFileIsOpen(file_j, "journals.txt");
+				fillDBJournal(file_j);
+				file_j.close();
+				break;
+			}
+			case 2:
+			{
+				checkFileIsOpen(file_j, "journals.txt", true, true, true);
+				printDBJournal(file_j);
+				file_j.close();
+				break;
+			}
+			case 3:
+			{
+				checkFileIsOpen(file_j, "journals.txt", true, true, true);
+				addnewJournal(file_j);
+				file_j.close();
+				break;
+			}
+			case 4:
+			{
+				checkFileIsOpen(file_j, "journals.txt", true, true, true);
+				deleteJournal(file_j);
+				file_j.close();
+				break;
+			}
+			case 5:
+			{
+				checkFileIsOpen(file_j, "journals.txt", true, true, true);
+				sortDBJournal(file_j);
+				break;
+			}
+			case 6:
+			{
+				checkFileIsOpen(file_j, "journals.txt", true, true, true);
+				searchDBJournal(file_j);
+				break;
+			}
+			case 7:
+			{
+				checkFileIsOpen(file_j, "journals.txt", true, true, true);
+				vibyrkaDBJournal(file_j);
+				break;
+			}
+			case -1:
+			{
+				break;
+			}
+			default:
+				cout << "Error number, press -1 to exit program" << endl;
+				break;
 			}
 		}
 		break;
 	}
 	case 'n':
 	{
-		fstream file_n("newspapers.txt", ios_base::out | ios_base::in | ios_base::app); // написати як в книжці
+		fstream file_n("newspapers.txt", ios_base::out | ios_base::in);
 		if (!file_n.is_open())
 		{
-			cout << "Error, file don't open" << endl;
-		}
-		else
-		{
-			int choice_n = 0;
-			while (choice_n != -1)
+			cout << "This file don't exist, create?(y/n): ";
+			char choice_create;
+			cin >> choice_create;
+			if (choice_create == 'y')
 			{
-				cout << "1. Fill db by newspapers" << endl;
-				cout << "2. Print newspapers" << endl;
-				cout << "3. Add newspaper" << endl;
-				cout << "4. Delete newspaper" << endl;
-				cout << "5. Sort newspapers" << endl;
-				cout << "6. Search newspaper" << endl;
-				cout << "7. Delete newspapers for year" << endl;
-				cout << "-1. Exit program" << endl;
-				cout << "Enter a number: "; cin >> choice_n;
-				switch (choice_n)
-				{
-				case 1:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					fillDBNewspaper(file_n);
-					file_n.close();
-					break;
-				}
-				case 2:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					printDBNewspaper(file_n);
-					file_n.close();
-					break;
-				}
-				case 3:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					addnewNewspaper(file_n);
-					file_n.close();
-					break;
-				}
-				case 4:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					deleteNewspaper(file_n);
-					file_n.close();
-					break;
-				}
-				case 5:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					sortDBNewspaper(file_n);
-					file_n.close();
-					break;
-				}
-				case 6:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					searchDBNewspaper(file_n);
-					file_n.close();
-					break;
-				}
-				case 7:
-				{
-					checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
-					deleteNewspaperForYear(file_n);
-					break;
-				}
-				case -1:
-				{
-					break;
-				}
-				default:
-					cout << "Error number, press -1 to exit program" << endl;
-					break;
-				}
+				fstream create_file("newspapers.txt", ios_base::app); // створюю файл
+				create_file.close();
+			}
+			else
+			{
+				cout << "Exiting..." << endl;
+				break;
+			}
+		}
+		int choice_n = 0;
+		while (choice_n != -1)
+		{
+			cout << "1. Fill db by newspapers" << endl;
+			cout << "2. Print newspapers" << endl;
+			cout << "3. Add newspaper" << endl;
+			cout << "4. Delete newspaper" << endl;
+			cout << "5. Sort newspapers" << endl;
+			cout << "6. Search newspaper" << endl;
+			cout << "7. Delete newspapers for year" << endl;
+			cout << "-1. Exit program" << endl;
+			cout << "Enter a number: "; cin >> choice_n;
+			switch (choice_n)
+			{
+			case 1:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				fillDBNewspaper(file_n);
+				file_n.close();
+				break;
+			}
+			case 2:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				printDBNewspaper(file_n);
+				file_n.close();
+				break;
+			}
+			case 3:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				addnewNewspaper(file_n);
+				file_n.close();
+				break;
+			}
+			case 4:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				deleteNewspaper(file_n);
+				file_n.close();
+				break;
+			}
+			case 5:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				sortDBNewspaper(file_n);
+				file_n.close();
+				break;
+			}
+			case 6:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				searchDBNewspaper(file_n);
+				file_n.close();
+				break;
+			}
+			case 7:
+			{
+				checkFileIsOpen(file_n, "newspapers.txt", true, true, true);
+				deleteNewspaperForYear(file_n);
+				break;
+			}
+			case -1:
+			{
+				break;
+			}
+			default:
+				cout << "Error number, press -1 to exit program" << endl;
+				break;
 			}
 		}
 		break;
