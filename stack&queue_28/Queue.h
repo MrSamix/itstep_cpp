@@ -7,9 +7,6 @@ struct Element
 {
 	int data;
 	int priority;
-	/*Element(const int& data, const int& priority)
-		: data(data), priority(priority)
-	{}*/
 	Element(const int& data = 0, const int& priority = 0)
 		:data(data), priority(priority)
 	{}
