@@ -3,12 +3,13 @@
 class Daddy :
     public Grandpa
 {
+public:
     Daddy(const string& name)
         :Grandpa(name)
     {}
     virtual void Walk() const
     {
-        cout << name << " is walking.";
+        cout << typeid(*this).name() << " " << name << " is walking." << endl;
     }
 };
 

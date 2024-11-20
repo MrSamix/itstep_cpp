@@ -9,7 +9,7 @@ public:
 	{}
 	virtual void Sleep() const
 	{
-		cout << name << " is sleeping.";
+		cout << typeid(*this).name() << " " << name << " is sleeping." << endl;
 	}
 protected:
 	string name;
