@@ -47,9 +47,6 @@
     <ClInclude Include="Catapult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Connections.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Fortress.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shooter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Connections.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
