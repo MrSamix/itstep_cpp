@@ -25,6 +25,7 @@ public:
 		cout << "Date: "; date.print();
 		absent == true ? cout << "Mark: " << "Absent" << endl : cout << "Mark: " << mark << endl;
 	}
+
 	void edit()
 	{
 		cout << "Editing mark #" << id << endl;
@@ -86,4 +87,4 @@ private:
 	}
 };
 
-int Mark::last_id = 0;
+//int Mark::last_id = 0;

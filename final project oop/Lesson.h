@@ -29,6 +29,17 @@ public:
 		cout << "Group: " << group << endl;
 		cout << "Date: "; date.print();
 	}
+
+	Lesson(const Lesson& other)
+		:date(other.date)
+	{
+		this->name = new char[SIZE];
+		this->group = new char[SIZE];
+
+		strcpy_s(this->name, SIZE, other.name);
+		strcpy_s(this->group, SIZE, other.group);
+	}
+
 	void edit()
 	{
 		cout << "Editing lesson #" << id << endl;
@@ -83,4 +94,4 @@ private:
 };
 
 
-int Lesson::last_id = 0;
+//int Lesson::last_id = 0;

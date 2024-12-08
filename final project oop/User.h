@@ -31,6 +31,23 @@ public:
 		cout << "Group: " << group << endl;
 	}
 
+    User(const User& other)
+		:birthdayDate(other.birthdayDate)
+    {
+		this->surname = new char[SIZE];
+		this->name = new char[SIZE];
+		this->group = new char[SIZE];
+
+		strcpy_s(this->surname, SIZE, other.surname);
+		strcpy_s(this->name, SIZE, other.name);
+		strcpy_s(this->group, SIZE, other.group);
+    }
+
+
+	int getIDUser() // geter
+	{
+		return id;
+	}
 	void edit()
 	{
 		cout << "Edititng User #" << id << endl;
@@ -91,5 +108,5 @@ private:
 	char* group = nullptr;
 };
 
-int User::last_id = 0;
+//int User::last_id = 0;
 
