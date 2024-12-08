@@ -18,6 +18,11 @@ public:
 
 	void printUsers() const
 	{
+		if (users.size() == 0)
+		{
+			cout << "List of users is empty!" << endl;
+			return;
+		}
 		for (auto& i : users)
 		{
 			i.print();
@@ -26,11 +31,18 @@ public:
 
 	void printLessons() const
 	{
+		if (lessons.size() == 0)
+		{
+			cout << "List of lessons is empty!" << endl;
+			return;
+		}
 		for (auto& i : lessons)
 		{
 			i.print();
 		}
 	}
+
+	void saveUsers(string pthfileUsers);
 
 private:
 	vector<User> users;

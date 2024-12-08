@@ -16,12 +16,56 @@ public:
 		strcpy_s(this->name, SIZE, name);
 		strcpy_s(this->group, SIZE, group);
 	}
+	User() : birthdayDate(1, 1, 1) // Default constructor
+	{
+		this->surname = new char[SIZE] {};
+		this->name = new char[SIZE] {};
+		this->group = new char[SIZE] {};
+	}
+	//User() = default; // not recommended, test
 	~User()
 	{
 		delete[] surname;
 		delete[] name;
 		delete[] group;
 	}
+
+	User(const User& other) // copy ctor
+		:birthdayDate(other.birthdayDate)
+	{
+		this->surname = new char[SIZE];
+		this->name = new char[SIZE];
+		this->group = new char[SIZE];
+
+		strcpy_s(this->surname, SIZE, other.surname);
+		strcpy_s(this->name, SIZE, other.name);
+		strcpy_s(this->group, SIZE, other.group);
+	}
+
+	User& operator=(const User& other)
+	{
+		if (this == &other)
+			return *this;
+
+		delete[] surname;
+		delete[] name;
+		delete[] group;
+
+		this->surname = new char[SIZE];
+		this->name = new char[SIZE];
+		this->group = new char[SIZE];
+
+		strcpy_s(this->surname, SIZE, other.surname);
+		strcpy_s(this->name, SIZE, other.name);
+		strcpy_s(this->group, SIZE, other.group);
+
+		birthdayDate = other.birthdayDate;
+
+		return *this;
+	}
+
+    
+
 	void print() const
 	{
 		cout << "User #" << id << endl;
@@ -30,18 +74,6 @@ public:
 		cout << "Birthday date: "; birthdayDate.print();
 		cout << "Group: " << group << endl;
 	}
-
-    User(const User& other)
-		:birthdayDate(other.birthdayDate)
-    {
-		this->surname = new char[SIZE];
-		this->name = new char[SIZE];
-		this->group = new char[SIZE];
-
-		strcpy_s(this->surname, SIZE, other.surname);
-		strcpy_s(this->name, SIZE, other.name);
-		strcpy_s(this->group, SIZE, other.group);
-    }
 
 
 	int getIDUser() // geter
