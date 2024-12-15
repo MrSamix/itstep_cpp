@@ -14,6 +14,7 @@ public:
 		strcpy_s(this->group, SIZE, group);
 	}
 	void menu();
+	//void menu();
 
 
 	void printUsers() const
@@ -42,13 +43,46 @@ public:
 		}
 	}
 
+	void printMarks() const
+	{
+		if (marks.size() == 0)
+		{
+			cout << "List of marks is empty!" << endl;
+			return;
+		}
+		for (auto& i : marks)
+		{
+			bool Flag = false;
+			i.print();
+			for (auto& j : lessons)
+			{
+				if (j.getIDLesson() == i.getIDLesson())
+				{
+					cout << "Lesson: " << j.getLesson() << endl;
+					Flag = true;
+					break;
+				}
+			}
+			if (!Flag)
+			{
+				cout << "Lesson: " << i.getIDLesson() << endl;
+			}
+		}
+	}
+
 	void saveUsers(string pthfileUsers);
+	void saveMarks(string pthfileMarks);
+	void saveLessons(string pthfileLessons);
+	void printInfo();
 
 private:
 	vector<User> users;
 	vector<Lesson> lessons;
 	vector<Mark> marks;
 	char* group = nullptr;
+	static int lastIdUser;
+	static int lastIdLesson;
+	static int lastIdMark;
 	// string filename's
 };
 

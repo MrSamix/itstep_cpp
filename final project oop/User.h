@@ -8,6 +8,18 @@ public:
 	User(const char* surname, const char* name, Date birthdayDate, const char* group)
 		:birthdayDate(birthdayDate)
 	{
+		this->id = last_id++;
+		this->surname = new char[SIZE];
+		this->name = new char[SIZE];
+		this->group = new char[SIZE];
+
+		strcpy_s(this->surname, SIZE, surname);
+		strcpy_s(this->name, SIZE, name);
+		strcpy_s(this->group, SIZE, group);
+	}
+	User(int id, const char* surname, const char* name, Date birthdayDate, const char* group)
+		:birthdayDate(birthdayDate), id(id)
+	{
 		this->surname = new char[SIZE];
 		this->name = new char[SIZE];
 		this->group = new char[SIZE];
@@ -31,7 +43,7 @@ public:
 	}
 
 	User(const User& other) // copy ctor
-		:birthdayDate(other.birthdayDate)
+		:birthdayDate(other.birthdayDate), id(other.id)
 	{
 		this->surname = new char[SIZE];
 		this->name = new char[SIZE];
@@ -131,8 +143,58 @@ public:
 		print();
 	}
 
+
+	// saving and importing from file
+
+	friend ostream& operator<<(std::ostream& os, const User& user)
+	{
+		os << user.id << ' ' << user.surname << ' ' << user.name << ' ' << user.birthdayDate.day << ' ' << user.birthdayDate.month << ' ' << user.birthdayDate.year << ' ' << user.group;
+		return os;
+	}
+	friend std::istream& operator>>(std::istream& is, User& user)
+	{
+		/*int id;
+		char surname[SIZE];
+		char name[SIZE];
+		int day, month, year;
+		char group[SIZE];
+
+		is >> id >> surname >> name >> day >> month >> year >> group;
+
+		user.id = id;
+		strcpy_s(user.surname, SIZE, surname);
+		strcpy_s(user.name, SIZE, name);
+		user.birthdayDate = Date(day, month, year);
+		strcpy_s(user.group, SIZE, group);
+
+		return is;*/
+		int id;
+		char surname[SIZE];
+		char name[SIZE];
+		int day, month, year;
+		char group[SIZE];
+
+		is >> id >> surname >> name >> day >> month >> year >> group;
+
+		user.id = id;
+		delete[] user.surname;
+		delete[] user.name;
+		delete[] user.group;
+		user.surname = new char[SIZE];
+		user.name = new char[SIZE];
+		user.group = new char[SIZE];
+		strcpy_s(user.surname, SIZE, surname);
+		strcpy_s(user.name, SIZE, name);
+		user.birthdayDate = Date(day, month, year);
+		strcpy_s(user.group, SIZE, group);
+
+		return is;
+	}
+
+
 private:
-	const int id = last_id++;
+	//const int id = last_id++;
+	int id;
 	static int last_id;
 	char* surname = nullptr;
 	char* name = nullptr;
