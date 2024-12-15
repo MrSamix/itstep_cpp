@@ -14,66 +14,22 @@ public:
 		strcpy_s(this->group, SIZE, group);
 	}
 	void menu();
-	//void menu();
 
+	void printUsers() const;
+	void printLessons() const;
+	void printMarks() const;
+	
+	void printInfo();
 
-	void printUsers() const
-	{
-		if (users.size() == 0)
-		{
-			cout << "List of users is empty!" << endl;
-			return;
-		}
-		for (auto& i : users)
-		{
-			i.print();
-		}
-	}
-
-	void printLessons() const
-	{
-		if (lessons.size() == 0)
-		{
-			cout << "List of lessons is empty!" << endl;
-			return;
-		}
-		for (auto& i : lessons)
-		{
-			i.print();
-		}
-	}
-
-	void printMarks() const
-	{
-		if (marks.size() == 0)
-		{
-			cout << "List of marks is empty!" << endl;
-			return;
-		}
-		for (auto& i : marks)
-		{
-			bool Flag = false;
-			i.print();
-			for (auto& j : lessons)
-			{
-				if (j.getIDLesson() == i.getIDLesson())
-				{
-					cout << "Lesson: " << j.getLesson() << endl;
-					Flag = true;
-					break;
-				}
-			}
-			if (!Flag)
-			{
-				cout << "Lesson: " << i.getIDLesson() << endl;
-			}
-		}
-	}
 
 	void saveUsers(string pthfileUsers);
 	void saveMarks(string pthfileMarks);
 	void saveLessons(string pthfileLessons);
-	void printInfo();
+	
+	bool isValidPth(string pthFile);
+
+	void countAvg();
+	void countAvg(int user_id, int lesson_id);
 
 private:
 	vector<User> users;

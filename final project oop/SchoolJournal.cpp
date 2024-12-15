@@ -21,8 +21,11 @@ void SchoolJournal::menu()
     case 'y':
     {
         cout << "Enter filename(without .txt): "; cin >> pthfileUser;
+        if (isValidPth(pthfileUser))
+        {
+            pthfileUser = pthfileUser + ".txt";
+        }
         //write validation(inputed txt or not)
-        pthfileUser = pthfileUser + ".txt";
         fstream fileUser(pthfileUser, ios_base::in | ios_base::out);
         if (!fileUser.is_open())
         {
@@ -41,11 +44,11 @@ void SchoolJournal::menu()
         case 'y':
         {
             cout << "Enter filename(without .txt): "; cin >> pthfileUser;
-            // enter validation(if user enter with .txt)
-            pthfileUser = pthfileUser + ".txt";
+            if (isValidPth(pthfileUser))
+            {
+                pthfileUser = pthfileUser + ".txt";
+            }
             fstream fileUser(pthfileUser, ios_base::app | ios_base::out | ios_base::in);
-            //fstream fileUser;
-            //fileUser.open(pthfileUser, ios_base::out | ios_base::in);
             if (!fileUser.is_open())
             {
                 throw runtime_error("Error opening file");
@@ -77,8 +80,11 @@ void SchoolJournal::menu()
     case 'y':
     {
         cout << "Enter filename(without .txt): "; cin >> pthfileLesson;
+        if (isValidPth(pthfileLesson))
+        {
+            pthfileLesson = pthfileLesson + ".txt";
+        }
         //write validation(inputed txt or not)
-        pthfileLesson = pthfileLesson + ".txt";
         fstream fileLesson(pthfileLesson, ios_base::in | ios_base::out);
         if (!fileLesson.is_open())
         {
@@ -98,7 +104,10 @@ void SchoolJournal::menu()
         {
             cout << "Enter filename(without .txt): "; cin >> pthfileLesson;
             // enter validation(if user enter with .txt)
-            pthfileLesson = pthfileLesson + ".txt";
+            if (isValidPth(pthfileLesson))
+            {
+                pthfileLesson = pthfileLesson + ".txt";
+            }
             fstream fileLesson(pthfileLesson, ios_base::app | ios_base::out | ios_base::in);
             if (!fileLesson.is_open())
             {
@@ -131,8 +140,11 @@ void SchoolJournal::menu()
     case 'y':
     {
         cout << "Enter filename(without .txt): "; cin >> pthfileMark;
+        if (isValidPth(pthfileMark))
+        {
+            pthfileMark = pthfileMark + ".txt";
+        }
         //write validation(inputed txt or not)
-        pthfileMark = pthfileMark + ".txt";
         fstream fileMark(pthfileMark, ios_base::in | ios_base::out);
         if (!fileMark.is_open())
         {
@@ -152,7 +164,10 @@ void SchoolJournal::menu()
         {
             cout << "Enter filename(without .txt): "; cin >> pthfileMark;
             // enter validation(if user enter with .txt)
-            pthfileMark = pthfileMark + ".txt";
+            if (isValidPth(pthfileMark))
+            {
+                pthfileMark = pthfileMark + ".txt";
+            }
             fstream fileMark(pthfileMark, ios_base::app | ios_base::out | ios_base::in);
             if (!fileMark.is_open())
             {
@@ -445,7 +460,7 @@ void SchoolJournal::menu()
         {
             // Count user avg mark
             system("cls");
-            printUsers();
+            /*printUsers();
             cout << endl;
             int user;
             cout << "Enter a ID user what do you need a count avg mark: "; cin >> user;
@@ -479,7 +494,7 @@ void SchoolJournal::menu()
                 float avg = (float)sum / counter;
                 system("cls");
                 cout << "Avg user for lesson id " << lesson << " == " << avg << endl;
-            }
+            }*/
             break;
         }
         case 14:
@@ -543,15 +558,66 @@ void SchoolJournal::menu()
     } while (choice_menu != 0);
 }
 
+void SchoolJournal::printUsers() const
+{
+    if (users.size() == 0)
+    {
+        cout << "List of users is empty!" << endl;
+        return;
+    }
+    for (auto& i : users)
+    {
+        i.print();
+    }
+}
+
+void SchoolJournal::printLessons() const
+{
+    if (lessons.size() == 0)
+    {
+        cout << "List of lessons is empty!" << endl;
+        return;
+    }
+    for (auto& i : lessons)
+    {
+        i.print();
+    }
+}
+
+void SchoolJournal::printMarks() const
+{
+    if (marks.size() == 0)
+    {
+        cout << "List of marks is empty!" << endl;
+        return;
+    }
+    for (auto& i : marks)
+    {
+        bool Flag = false;
+        i.print();
+        for (auto& j : lessons)
+        {
+            if (j.getIDLesson() == i.getIDLesson())
+            {
+                cout << "Lesson: " << j.getLesson() << endl;
+                Flag = true;
+                break;
+            }
+        }
+        if (!Flag)
+        {
+            cout << "Lesson: " << i.getIDLesson() << endl;
+        }
+    }
+}
+
 void SchoolJournal::saveUsers(string pthfileUsers)
 {
-    //fstream fileUser(pthfileUsers, ios_base::out);
     ofstream fileUser(pthfileUsers);
     if (!fileUser.is_open())
     {
         throw runtime_error("Error opening file");
     }
-    //fileUser.write(reinterpret_cast<char*>(users.data()), sizeof(User) * users.size());
     for (const auto& user : users)
     {
         fileUser << user << endl;
@@ -590,12 +656,91 @@ void SchoolJournal::saveLessons(string pthfileLessons)
     cout << "Lessons saved!" << endl;
 }
 
+bool SchoolJournal::isValidPth(string pthFile)
+{
+    if (pthFile.find(".txt") != string::npos)
+    {
+        return false;
+    }
+    return true;
+}
+
 void SchoolJournal::printInfo()
 {
     cout << "Info about " << group << ":" << endl;
     cout << "Count of users: " << lastIdUser << endl;
     cout << "Count of lessons: " << lastIdLesson << endl;
     cout << "Count of marks: " << lastIdMark << endl;
+}
+
+void SchoolJournal::countAvg()
+{
+    printUsers();
+    cout << endl;
+    int user;
+    cout << "Enter a ID user what do you need a count avg mark: "; cin >> user;
+    int lesson;
+    system("cls");
+    printLessons();
+    cout << "Enter a ID lesson : "; cin >> lesson;
+    int sum = 0;
+    int counter = 0;
+    for (auto& i : marks)
+    {
+        if (user == i.getIDUser())
+        {
+            if (lesson == i.getIDLesson())
+            {
+                if (!i.isAbsent())
+                {
+                    sum += i.getMark();
+                    counter++;
+                }
+            }
+        }
+    }
+    if (counter == 0 || sum == 0)
+    {
+        system("cls");
+        cout << "User hasn't any marks!" << endl;
+    }
+    else
+    {
+        float avg = (float)sum / counter;
+        system("cls");
+        cout << "Avg user for lesson id " << lesson << " == " << avg << endl;
+    }
+}
+
+void SchoolJournal::countAvg(int user_id, int lesson_id)
+{
+    int sum = 0;
+    int counter = 0;
+    for (auto& i : marks)
+    {
+        if (user_id == i.getIDUser())
+        {
+            if (lesson_id == i.getIDLesson())
+            {
+                if (!i.isAbsent())
+                {
+                    sum += i.getMark();
+                    counter++;
+                }
+            }
+        }
+    }
+    if (counter == 0 || sum == 0)
+    {
+        system("cls");
+        cout << "User hasn't any marks!" << endl;
+    }
+    else
+    {
+        float avg = (float)sum / counter;
+        system("cls");
+        cout << "Avg user for lesson id " << lesson_id << " == " << avg << endl;
+    }
 }
 
 int SchoolJournal::lastIdUser = 0;
