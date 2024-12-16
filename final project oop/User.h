@@ -28,13 +28,13 @@ public:
 		strcpy_s(this->name, SIZE, name);
 		strcpy_s(this->group, SIZE, group);
 	}
-	User() : birthdayDate(1, 1, 1) // Default constructor
+	User() : birthdayDate(1, 1, 2001)
 	{
 		this->surname = new char[SIZE] {};
 		this->name = new char[SIZE] {};
 		this->group = new char[SIZE] {};
 	}
-	//User() = default; // not recommended, test
+
 	~User()
 	{
 		delete[] surname;
@@ -98,10 +98,10 @@ public:
 		print();
 		char newSurname[SIZE];
 		char newName[SIZE];
-		char newGroup[SIZE];
+		//char newGroup[SIZE];
 		cout << "\nEnter new surname(enter -1 if you don't change): "; cin >> newSurname;
 		cout << "\nEnter new name(enter -1 if you don't change): "; cin >> newName;
-		cout << "\nEnter new group(enter -1 if you don't change): "; cin >> newGroup;
+		//cout << "\nEnter new group(enter -1 if you don't change): "; cin >> newGroup;
 
 		if (strcmp(newSurname, "-1"))
 		{
@@ -115,12 +115,12 @@ public:
 			name = new char[SIZE];
 			strcpy_s(name, SIZE, newName);
 		}
-		if (strcmp(newGroup, "-1"))
-		{
-			delete[] group;
-			group = new char[SIZE];
-			strcpy_s(group, SIZE, newGroup);
-		}
+		//if (strcmp(newGroup, "-1"))
+		//{
+		//	delete[] group;
+		//	group = new char[SIZE];
+		//	strcpy_s(group, SIZE, newGroup);
+		//}
 
 		char choice;
 		cout << "Do you have to change date?(y/n): "; cin >> choice;
@@ -151,23 +151,8 @@ public:
 		os << user.id << ' ' << user.surname << ' ' << user.name << ' ' << user.birthdayDate.day << ' ' << user.birthdayDate.month << ' ' << user.birthdayDate.year << ' ' << user.group;
 		return os;
 	}
-	friend std::istream& operator>>(std::istream& is, User& user)
+	friend istream& operator>>(std::istream& is, User& user)
 	{
-		/*int id;
-		char surname[SIZE];
-		char name[SIZE];
-		int day, month, year;
-		char group[SIZE];
-
-		is >> id >> surname >> name >> day >> month >> year >> group;
-
-		user.id = id;
-		strcpy_s(user.surname, SIZE, surname);
-		strcpy_s(user.name, SIZE, name);
-		user.birthdayDate = Date(day, month, year);
-		strcpy_s(user.group, SIZE, group);
-
-		return is;*/
 		int id;
 		char surname[SIZE];
 		char name[SIZE];

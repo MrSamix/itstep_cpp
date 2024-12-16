@@ -261,7 +261,7 @@ void SchoolJournal::menu()
     }
     
 
-    // Menu
+    // Menu дописати вивести оцінки для користувача(водиться юезр ід і урок ід)
     system("cls");
     short choice_menu;
     do
@@ -296,6 +296,7 @@ void SchoolJournal::menu()
         case 3:
         {
             printUsers();
+            bool userFound = false;
             cout << endl;
             int choice;
             cout << "Enter a ID user what do you need a change info: "; cin >> choice;
@@ -305,13 +306,19 @@ void SchoolJournal::menu()
                 if (i.getIDUser() == choice)
                 {
                     i.edit();
+                    userFound = true;
                 }
+            }
+            if (!userFound)
+            {
+                cout << "User not found!" << endl;
             }
             break;
         }
         case 4:
         {
             system("cls");
+            bool userFound = false;
             printUsers();
             cout << endl;
             int choice;
@@ -324,8 +331,13 @@ void SchoolJournal::menu()
                 {
                     users.erase(users.begin() + counter);
                     cout << "Deleted!" << endl;
+                    userFound = true;
                 }
                 counter++;
+            }
+            if (!userFound)
+            {
+                cout << "User not found!" << endl;
             }
             break;
         }
@@ -338,10 +350,8 @@ void SchoolJournal::menu()
         case 6:
         {
             char name[SIZE]{};
-            /*char group[SIZE]{};*/
             int day, month, year;
             cout << "Enter name of lesson: "; cin >> name;
-            //cout << "Enter group: "; cin >> group;
             cout << "Enter date(Format: DD MM YYYY): "; cin >> day >> month >> year;
 
             Lesson lesson(this->lastIdLesson++, name, this->group, Date(day, month, year));
@@ -352,7 +362,9 @@ void SchoolJournal::menu()
         }
         case 7:
         {
-            // Edit lesson
+            // Edit 
+            bool lessonFounded = false;
+            system("cls");
             printLessons();
             cout << endl;
             int choice;
@@ -363,14 +375,19 @@ void SchoolJournal::menu()
                 if (i.getIDLesson() == choice)
                 {
                     i.edit();
+                    lessonFounded = true;
                 }
             }
-            // write a check if user mark or lesson not found!
+            if (!lessonFounded)
+            {
+                cout << "Lesson not found!" << endl;
+            }
             break;
         }
         case 8:
         {
             // Delete lesson
+            bool lessonFounded = false;
             system("cls");
             printLessons();
             cout << endl;
@@ -384,8 +401,13 @@ void SchoolJournal::menu()
                 {
                     lessons.erase(lessons.begin() + counter);
                     cout << "Deleted!" << endl;
+                    lessonFounded = true;
                 }
                 counter++;
+            }
+            if (!lessonFounded)
+            {
+                cout << "Lesson not found!" << endl;
             }
             break;
         }
@@ -421,6 +443,7 @@ void SchoolJournal::menu()
         case 11:
         {
             // Edit mark
+            bool markFound = false;
             printMarks();
             cout << endl;
             int choice;
@@ -431,13 +454,19 @@ void SchoolJournal::menu()
                 if (i.getIDMark() == choice)
                 {
                     i.edit();
+                    markFound = true;
                 }
+            }
+            if (!markFound)
+            {
+                cout << "Mark not found!" << endl;
             }
             break;
         }
         case 12:
         {
             // Delete mark
+            bool markFound = false;
             system("cls");
             printMarks();
             cout << endl;
@@ -451,16 +480,22 @@ void SchoolJournal::menu()
                 {
                     marks.erase(marks.begin() + counter);
                     cout << "Deleted!" << endl;
+                    markFound = true;
                 }
                 counter++;
             }
+            if (!markFound)
+            {
+                cout << "Mark not found!" << endl;
+            }
+
             break;
         }
         case 13:
         {
             // Count user avg mark
             system("cls");
-            /*printUsers();
+            printUsers();
             cout << endl;
             int user;
             cout << "Enter a ID user what do you need a count avg mark: "; cin >> user;
@@ -494,7 +529,7 @@ void SchoolJournal::menu()
                 float avg = (float)sum / counter;
                 system("cls");
                 cout << "Avg user for lesson id " << lesson << " == " << avg << endl;
-            }*/
+            }
             break;
         }
         case 14:
@@ -508,7 +543,7 @@ void SchoolJournal::menu()
             // Save users
             if (usefileUsers)
             {
-                saveUsers(pthfileUser); // fix if user don't create a file
+                saveUsers(pthfileUser);
             }
             else
             {
@@ -539,7 +574,7 @@ void SchoolJournal::menu()
             else
             {
                 cout << "Please, enter your name file of marks(without .txt): " << endl;
-                cin >> pthfileMark; // check if user input with .txt
+                cin >> pthfileMark;
                 pthfileMark = pthfileMark + ".txt";
                 saveMarks(pthfileMark);
             }

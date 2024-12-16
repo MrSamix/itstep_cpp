@@ -55,12 +55,12 @@ public:
 		return name;
 	}
 
-	friend ostream& operator<<(std::ostream& os, const Lesson& lesson)
+	friend ostream& operator<<(ostream& os, const Lesson& lesson)
 	{
 		os << lesson.id << ' ' << lesson.name << ' ' << lesson.date.day << ' ' << lesson.date.month << ' ' << lesson.date.year << ' ' << lesson.group;
 		return os;
 	}
-	friend std::istream& operator>>(std::istream& is, Lesson& lesson)
+	friend istream& operator>>(istream& is, Lesson& lesson)
 	{
 		int id;
 		char name[SIZE];
@@ -98,11 +98,11 @@ public:
 		cout << "Current: " << endl;
 		print();
 		char newName[SIZE]{};
-		char newGroup[SIZE]{};
+		//char newGroup[SIZE]{};
 		cout << "\nEnter new name(enter -1 if you don't change): " << endl;
 		cin >> newName;
-		cout << "\nEnter new group(enter -1 if you don't change): " << endl;
-		cin >> newGroup;
+		//cout << "\nEnter new group(enter -1 if you don't change): " << endl;
+		//cin >> newGroup;
 		char choice;
 		cout << "Do you have to change date?(y/n): "; cin >> choice;
 		switch (choice)
@@ -126,13 +126,13 @@ public:
 			//strcpy_s(this->name, strlen(newName) + 1, newName);
 			strcpy_s(this->name, SIZE, newName);
 		}
-		if (strcmp(newGroup, "-1"))
-		{
-			delete[] group;
-			group = new char[SIZE];
-			//strcpy_s(this->group, strlen(newGroup) + 1, newGroup);
-			strcpy_s(this->group, SIZE, newGroup);
-		}
+		//if (strcmp(newGroup, "-1"))
+		//{
+		//	delete[] group;
+		//	group = new char[SIZE];
+		//	//strcpy_s(this->group, strlen(newGroup) + 1, newGroup);
+		//	strcpy_s(this->group, SIZE, newGroup);
+		//}
 
 		cout << "Edited: " << endl;
 		print();
