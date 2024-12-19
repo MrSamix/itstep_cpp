@@ -154,5 +154,3 @@ private:
 		}
 	}
 };
-
-//int Mark::last_id = 0;

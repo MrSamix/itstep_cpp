@@ -101,7 +101,6 @@ public:
 		//char newGroup[SIZE];
 		cout << "\nEnter new surname(enter -1 if you don't change): "; cin >> newSurname;
 		cout << "\nEnter new name(enter -1 if you don't change): "; cin >> newName;
-		//cout << "\nEnter new group(enter -1 if you don't change): "; cin >> newGroup;
 
 		if (strcmp(newSurname, "-1"))
 		{
@@ -115,12 +114,6 @@ public:
 			name = new char[SIZE];
 			strcpy_s(name, SIZE, newName);
 		}
-		//if (strcmp(newGroup, "-1"))
-		//{
-		//	delete[] group;
-		//	group = new char[SIZE];
-		//	strcpy_s(group, SIZE, newGroup);
-		//}
 
 		char choice;
 		cout << "Do you have to change date?(y/n): "; cin >> choice;
@@ -178,7 +171,6 @@ public:
 
 
 private:
-	//const int id = last_id++;
 	int id;
 	static int last_id;
 	char* surname = nullptr;
@@ -186,6 +178,4 @@ private:
 	Date birthdayDate;
 	char* group = nullptr;
 };
-
-//int User::last_id = 0;
 

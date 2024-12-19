@@ -19,17 +19,36 @@ public:
 	void printLessons() const;
 	void printMarks() const;
 	
-	void printInfo();
+	void printInfo() const;
 
 
 	void saveUsers(string pthfileUsers);
 	void saveMarks(string pthfileMarks);
 	void saveLessons(string pthfileLessons);
+
+
+	void importUsers(string pthfileUsers);
+	void importMarks(string pthfileMarks);
+	void importLessons(string pthfileLessons);
+	
 	
 	bool isValidPth(string pthFile);
 
-	void countAvg();
-	void countAvg(int user_id, int lesson_id);
+	void countAvg(int user_id, int lesson_id) const;
+
+	void addUser();
+	void editUser(int user_id);
+	void deleteUser(int user_id);
+
+	void addLesson();
+	void editLesson(int lesson_id);
+	void deleteLesson(int lesson_id);
+
+	void newMark();
+	void deleteMark(int mark_id);
+	void editMark(int mark_id);
+
+	void printMarks(int user_id, int lesson_id) const;
 
 private:
 	vector<User> users;

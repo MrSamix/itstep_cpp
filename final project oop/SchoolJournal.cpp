@@ -25,11 +25,10 @@ void SchoolJournal::menu()
         {
             pthfileUser = pthfileUser + ".txt";
         }
-        //write validation(inputed txt or not)
         fstream fileUser(pthfileUser, ios_base::in | ios_base::out);
         if (!fileUser.is_open())
         {
-            throw runtime_error("Error opening file");
+            cout << "ERROR: This file doen't created!" << endl;
         }
         usefileUsers = true;
         fileUser.close();
@@ -51,7 +50,7 @@ void SchoolJournal::menu()
             fstream fileUser(pthfileUser, ios_base::app | ios_base::out | ios_base::in);
             if (!fileUser.is_open())
             {
-                throw runtime_error("Error opening file");
+                cout << "ERROR: This file doen't created!";
             }
             usefileUsers = true;
             fileUser.close();
@@ -60,13 +59,13 @@ void SchoolJournal::menu()
         case 'n':
             break;
         default:
-            throw invalid_argument("Invalid choice");
+            cout << "ERROR: Invalid choice" << endl;
             break;
         }
         break;
     }
     default:
-        throw invalid_argument("Invalid choice");
+        cout << "ERROR: Invalid choice" << endl;
         break;
     }
 
@@ -84,11 +83,10 @@ void SchoolJournal::menu()
         {
             pthfileLesson = pthfileLesson + ".txt";
         }
-        //write validation(inputed txt or not)
         fstream fileLesson(pthfileLesson, ios_base::in | ios_base::out);
         if (!fileLesson.is_open())
         {
-            throw runtime_error("Error opening file");
+            cout << "ERROR: This file doen't created!" << endl;
         }
         usefileLessons = true;
         fileLesson.close();
@@ -103,7 +101,6 @@ void SchoolJournal::menu()
         case 'y':
         {
             cout << "Enter filename(without .txt): "; cin >> pthfileLesson;
-            // enter validation(if user enter with .txt)
             if (isValidPth(pthfileLesson))
             {
                 pthfileLesson = pthfileLesson + ".txt";
@@ -111,7 +108,7 @@ void SchoolJournal::menu()
             fstream fileLesson(pthfileLesson, ios_base::app | ios_base::out | ios_base::in);
             if (!fileLesson.is_open())
             {
-                throw runtime_error("Error opening file");
+                cout << "ERROR: This file doen't created!" << endl;
             }
             usefileLessons = true;
             fileLesson.close();
@@ -120,13 +117,13 @@ void SchoolJournal::menu()
         case 'n':
             break;
         default:
-            throw invalid_argument("Invalid choice");
+            cout << "ERROR: Invalid choice" << endl;
             break;
         }
         break;
     }
     default:
-        throw invalid_argument("Invalid choice");
+        cout << "ERROR: Invalid choice" << endl;
         break;
     }
 
@@ -144,11 +141,10 @@ void SchoolJournal::menu()
         {
             pthfileMark = pthfileMark + ".txt";
         }
-        //write validation(inputed txt or not)
         fstream fileMark(pthfileMark, ios_base::in | ios_base::out);
         if (!fileMark.is_open())
         {
-            throw runtime_error("Error opening file");
+            cout << "ERROR: This file doen't created!" << endl;
         }
         usefileMarks = true;
         fileMark.close();
@@ -163,7 +159,6 @@ void SchoolJournal::menu()
         case 'y':
         {
             cout << "Enter filename(without .txt): "; cin >> pthfileMark;
-            // enter validation(if user enter with .txt)
             if (isValidPth(pthfileMark))
             {
                 pthfileMark = pthfileMark + ".txt";
@@ -171,7 +166,7 @@ void SchoolJournal::menu()
             fstream fileMark(pthfileMark, ios_base::app | ios_base::out | ios_base::in);
             if (!fileMark.is_open())
             {
-                throw runtime_error("Error opening file");
+                cout << "ERROR: This file doen't created!" << endl;
             }
             usefileMarks = true;
             fileMark.close();
@@ -180,93 +175,65 @@ void SchoolJournal::menu()
         case 'n':
             break;
         default:
-            throw invalid_argument("Invalid choice");
+            cout << "ERROR: Invalid choice" << endl;
             break;
         }
         break;
     }
     default:
-        throw invalid_argument("Invalid choice");
+        cout << "ERROR: Invalid choice" << endl;
         break;
     }
 
     // загрузка з файла
-
     // User
-    ifstream fileUser(pthfileUser);
-    if (!fileUser.is_open())
+    
+    if (usefileUsers)
     {
-        cout << "Error opening file: " << pthfileUser << endl;
-    }
-    else if (usefileUsers)
-    {
-        string line;
-        while (getline(fileUser, line))
+        try
         {
-            istringstream iss(line); // для фіксу багу під час зчитування з файлу
-            User user;
-            if (iss >> user)
-            {
-                lastIdUser++;
-                users.push_back(user);
-            }
+            importUsers(pthfileUser);
         }
-        fileUser.close();
-
+        catch (const std::exception& ex)
+        {
+            cout << "ERROR: " << ex.what() << endl;
+        }
     }
 
     // Lesson
-    ifstream fileLesson(pthfileLesson);
-    if (!fileLesson.is_open())
+    
+    if (usefileLessons)
     {
-        cout << "Error opening file: " << pthfileLesson << endl;
-    }
-    else if (usefileLessons)
-    {
-        string line;
-        while (getline(fileLesson, line))
+        try
         {
-            istringstream iss(line); // для фіксу багу під час зчитування з файлу
-            Lesson lesson;
-            if (iss >> lesson)
-            {
-                lastIdLesson++;
-                lessons.push_back(lesson);
-            }
+            importLessons(pthfileLesson);
         }
-        fileLesson.close();
+        catch (const std::exception& ex)
+        {
+            cout << "ERROR: " << ex.what() << endl;
+        }
     }
-
 
     // Mark
-    ifstream fileMark(pthfileMark);
-    if (!fileMark.is_open())
-    {
-        cout << "Error opening file: " << pthfileMark << endl;
-    }
-    else if (usefileMarks)
-    {
-        string line;
-        while (getline(fileMark, line))
-        {
-            istringstream iss(line); // для фіксу багу під час зчитування з файлу
-            Mark mark;
-            if (iss >> mark)
-            {
-                lastIdMark++;
-                marks.push_back(mark);
-            }
-        }
-        fileMark.close();
-    }
     
+    if (usefileMarks)
+    {
+        try
+        {
+            importMarks(pthfileMark);
+        }
+        catch (const std::exception& ex)
+        {
+            cout << "ERROR: " << ex.what() << endl;
+        }
+    }
 
-    // Menu дописати вивести оцінки для користувача(водиться юезр ід і урок ід)
+
     system("cls");
     short choice_menu;
     do
     {
-        cout << "Menu:\n[1] Print user\n[2] Add User\n[3] Edit User\n[4] Delete User\n\n[5] Print Lessons\n[6] Add Lesson\n[7] Edit Lesson\n[8] Delete Lesson\n\n[9] Print Marks\n[10] New mark\n[11] Edit mark\n[12] Delete mark\n\n[13] Count user avg mark\n[14] Program info\n[15] Save\n[0] Exit\n";
+        cout << "Menu:\n[1] Print users\n[2] Add User\n[3] Edit User\n[4] Delete User\n\n[5] Print Lessons\n[6] Add Lesson\n[7] Edit Lesson\n[8] Delete Lesson\n\n[9] Print Marks\n[10] New mark\n[11] Edit mark\n[12] Delete mark\n\n[13] Count user avg mark\n[14] Program info\n[15] View marks from lesson\n[16] Save\n[0] Exit\n";
         cout << "Enter a choice: "; cin >> choice_menu;
         switch (choice_menu)
         {
@@ -278,66 +245,48 @@ void SchoolJournal::menu()
         }
         case 2:
         {
-            char surname[SIZE]{};
-            char name[SIZE]{};
-            /*char group[SIZE]{};*/
-            int day, month, year;
-            cout << "Enter surname: "; cin >> surname;
-            cout << "Enter name: "; cin >> name;
-            /*cout << "Enter group: "; cin >> group;*/
-            cout << "Enter birthday date(Format: DD MM YYYY): "; cin >> day >> month >> year;
-
-            User user(lastIdUser++, surname, name, Date(day, month, year), this->group);
-            users.push_back(user);
-            system("cls");
-            cout << "Added!" << endl;
+            try
+            {
+                addUser();
+            }
+            catch (const std::exception& ex)
+            {
+                cout << "ERROR: " << ex.what() << endl;
+            }
             break;
         }
         case 3:
         {
             printUsers();
-            bool userFound = false;
             cout << endl;
             int choice;
             cout << "Enter a ID user what do you need a change info: "; cin >> choice;
             system("cls");
-            for (auto& i : users)
+            try
             {
-                if (i.getIDUser() == choice)
-                {
-                    i.edit();
-                    userFound = true;
-                }
+                editUser(choice);
             }
-            if (!userFound)
+            catch (const std::exception& ex)
             {
-                cout << "User not found!" << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
             break;
         }
         case 4:
         {
             system("cls");
-            bool userFound = false;
             printUsers();
             cout << endl;
             int choice;
             cout << "Enter a ID user what do you need a delete: "; cin >> choice;
             system("cls");
-            int counter = 0;
-            for (auto& i : users)
+            try
             {
-                if (i.getIDUser() == choice)
-                {
-                    users.erase(users.begin() + counter);
-                    cout << "Deleted!" << endl;
-                    userFound = true;
-                }
-                counter++;
+                deleteUser(choice);
             }
-            if (!userFound)
+            catch (const std::exception& ex)
             {
-                cout << "User not found!" << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
             break;
         }
@@ -349,65 +298,53 @@ void SchoolJournal::menu()
         }
         case 6:
         {
-            char name[SIZE]{};
-            int day, month, year;
-            cout << "Enter name of lesson: "; cin >> name;
-            cout << "Enter date(Format: DD MM YYYY): "; cin >> day >> month >> year;
-
-            Lesson lesson(this->lastIdLesson++, name, this->group, Date(day, month, year));
-            lessons.push_back(lesson);
+            // Add lesson
             system("cls");
-            cout << "Added!" << endl;
+            try
+            {
+                addLesson();
+            }
+            catch (const std::exception& ex)
+            {
+                cout << "ERROR: " << ex.what() << endl;
+            }
             break;
         }
         case 7:
         {
-            // Edit 
-            bool lessonFounded = false;
+            // Edit lesson
             system("cls");
             printLessons();
             cout << endl;
             int choice;
             cout << "Enter a ID lesson what do you need a change info: "; cin >> choice;
             system("cls");
-            for (auto& i : lessons)
+            try
             {
-                if (i.getIDLesson() == choice)
-                {
-                    i.edit();
-                    lessonFounded = true;
-                }
+                editLesson(choice);
             }
-            if (!lessonFounded)
+            catch (const std::exception& ex)
             {
-                cout << "Lesson not found!" << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
             break;
         }
         case 8:
         {
             // Delete lesson
-            bool lessonFounded = false;
             system("cls");
             printLessons();
             cout << endl;
             int choice;
             cout << "Enter a ID lesson what do you need a delete: "; cin >> choice;
             system("cls");
-            int counter = 0;
-            for (auto& i : lessons)
+            try
             {
-                if (i.getIDLesson() == choice)
-                {
-                    lessons.erase(lessons.begin() + counter);
-                    cout << "Deleted!" << endl;
-                    lessonFounded = true;
-                }
-                counter++;
+                deleteLesson(choice);
             }
-            if (!lessonFounded)
+            catch (const std::exception& ex)
             {
-                cout << "Lesson not found!" << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
             break;
         }
@@ -422,22 +359,7 @@ void SchoolJournal::menu()
         {
             // New mark
             system("cls");
-            printUsers();
-            int user_id;
-            cout << "Select a user: "; cin >> user_id;
-            system("cls");
-            printLessons();
-            int lesson_id;
-            cout << "Select a lesson: "; cin >> lesson_id;
-            int day, month, year;
-            cout << "Input a date(Format: DD MM YYYY): "; cin >> day >> month >> year;
-            int mark;
-            cout << "Input a mark(input -1 if mark == absent): "; cin >> mark;
-            bool absent = (mark == -1 ? true : false);
-            Mark mark_obj(lastIdMark++, user_id, lesson_id, Date(day, month, year), absent, mark);
-            marks.push_back(mark_obj);
-            system("cls");
-            cout << "Added!" << endl;
+            newMark();
             break;
         }
         case 11:
@@ -449,17 +371,13 @@ void SchoolJournal::menu()
             int choice;
             cout << "Enter a ID mark what do you need a change info: "; cin >> choice;
             system("cls");
-            for (auto& i : marks)
+            try
             {
-                if (i.getIDMark() == choice)
-                {
-                    i.edit();
-                    markFound = true;
-                }
+                editMark(choice);
             }
-            if (!markFound)
+            catch (const std::exception& ex)
             {
-                cout << "Mark not found!" << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
             break;
         }
@@ -473,22 +391,14 @@ void SchoolJournal::menu()
             int choice;
             cout << "Enter a ID mark what do you need a delete: "; cin >> choice;
             system("cls");
-            int counter = 0;
-            for (auto& i : marks)
+            try
             {
-                if (i.getIDMark() == choice)
-                {
-                    marks.erase(marks.begin() + counter);
-                    cout << "Deleted!" << endl;
-                    markFound = true;
-                }
-                counter++;
+                deleteMark(choice);
             }
-            if (!markFound)
+            catch (const std::exception& ex)
             {
-                cout << "Mark not found!" << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
-
             break;
         }
         case 13:
@@ -505,30 +415,13 @@ void SchoolJournal::menu()
             cout << "Enter a ID lesson : "; cin >> lesson;
             int sum = 0;
             int counter = 0;
-            for (auto& i : marks)
+            try
             {
-                if (user == i.getIDUser())
-                {
-                    if (lesson == i.getIDLesson())
-                    {
-                        if (!i.isAbsent())
-                        {
-                            sum += i.getMark();
-                            counter++;
-                        }
-                    }
-                }
+                countAvg(user, lesson);
             }
-            if (counter == 0 || sum == 0)
+            catch (const std::exception& ex)
             {
-                system("cls");
-                cout << "User hasn't any marks!" << endl;
-            }
-            else
-            {
-                float avg = (float)sum / counter;
-                system("cls");
-                cout << "Avg user for lesson id " << lesson << " == " << avg << endl;
+                cout << "ERROR: " << ex.what() << endl;
             }
             break;
         }
@@ -540,6 +433,29 @@ void SchoolJournal::menu()
         }
         case 15:
         {
+            system("cls");
+            printUsers();
+            cout << endl;
+            int user;
+            cout << "Enter a ID user what do you need a count avg mark: "; cin >> user;
+            int lesson;
+            system("cls");
+            printLessons();
+            cout << "Enter a ID lesson : "; cin >> lesson;
+            system("cls");
+            try
+            {
+                printMarks(user, lesson);
+            }
+            catch (const std::exception& ex)
+            {
+                cout << "ERROR: " << ex.what() << endl;
+            }
+            break;
+            
+        }
+        case 16:
+        {
             // Save users
             if (usefileUsers)
             {
@@ -549,7 +465,10 @@ void SchoolJournal::menu()
             {
                 cout << "Please, enter your name file of users(without .txt): " << endl;
                 cin >> pthfileUser;
-                pthfileUser = pthfileUser + ".txt";
+                if (isValidPth(pthfileUser))
+                {
+                    pthfileUser = pthfileUser + ".txt";
+                }
                 saveUsers(pthfileUser);
             }
             
@@ -561,8 +480,11 @@ void SchoolJournal::menu()
             else
             {
                 cout << "Please, enter your name file of lessons(without .txt): " << endl;
-                cin >> pthfileLesson; // check if user input with .txt
-                pthfileLesson = pthfileLesson + ".txt";
+                cin >> pthfileLesson;
+                if (isValidPth(pthfileLesson))
+                {
+                    pthfileLesson = pthfileLesson + ".txt";
+                }
                 saveLessons(pthfileLesson);
             }
 
@@ -575,7 +497,10 @@ void SchoolJournal::menu()
             {
                 cout << "Please, enter your name file of marks(without .txt): " << endl;
                 cin >> pthfileMark;
-                pthfileMark = pthfileMark + ".txt";
+                if (isValidPth(pthfileMark))
+                {
+                    pthfileMark = pthfileMark + ".txt";
+                }
                 saveMarks(pthfileMark);
             }
             break;
@@ -691,6 +616,78 @@ void SchoolJournal::saveLessons(string pthfileLessons)
     cout << "Lessons saved!" << endl;
 }
 
+void SchoolJournal::importUsers(string pthfileUser)
+{
+    ifstream fileUser(pthfileUser);
+    if (!fileUser.is_open())
+    {
+        throw exception("Error opening file with users!");
+    }
+    else
+    {
+        string line;
+        while (getline(fileUser, line))
+        {
+            istringstream iss(line); // для фіксу багу під час зчитування з файлу
+            User user;
+            if (iss >> user)
+            {
+                lastIdUser = user.getIDUser();
+                users.push_back(user);
+            }
+        }
+        fileUser.close();
+    }
+}
+
+void SchoolJournal::importMarks(string pthfileMark)
+{
+    ifstream fileMark(pthfileMark);
+    if (!fileMark.is_open())
+    {
+        cout << "Error opening file: " << pthfileMark << endl;
+    }
+    else
+    {
+        string line;
+        while (getline(fileMark, line))
+        {
+            istringstream iss(line); // для фіксу багу під час зчитування з файлу
+            Mark mark;
+            if (iss >> mark)
+            {
+                lastIdMark = mark.getIDMark();
+                marks.push_back(mark);
+            }
+        }
+        fileMark.close();
+    }
+}
+
+void SchoolJournal::importLessons(string pthfileLesson)
+{
+    ifstream fileLesson(pthfileLesson);
+    if (!fileLesson.is_open())
+    {
+        throw exception("Error opening file with lessons!");
+    }
+    else
+    {
+        string line;
+        while (getline(fileLesson, line))
+        {
+            istringstream iss(line); // для фіксу багу під час зчитування з файлу
+            Lesson lesson;
+            if (iss >> lesson)
+            {
+                lastIdLesson = lesson.getIDLesson();
+                lessons.push_back(lesson);
+            }
+        }
+        fileLesson.close();
+    }
+}
+
 bool SchoolJournal::isValidPth(string pthFile)
 {
     if (pthFile.find(".txt") != string::npos)
@@ -700,7 +697,7 @@ bool SchoolJournal::isValidPth(string pthFile)
     return true;
 }
 
-void SchoolJournal::printInfo()
+void SchoolJournal::printInfo() const
 {
     cout << "Info about " << group << ":" << endl;
     cout << "Count of users: " << lastIdUser << endl;
@@ -708,49 +705,14 @@ void SchoolJournal::printInfo()
     cout << "Count of marks: " << lastIdMark << endl;
 }
 
-void SchoolJournal::countAvg()
-{
-    printUsers();
-    cout << endl;
-    int user;
-    cout << "Enter a ID user what do you need a count avg mark: "; cin >> user;
-    int lesson;
-    system("cls");
-    printLessons();
-    cout << "Enter a ID lesson : "; cin >> lesson;
-    int sum = 0;
-    int counter = 0;
-    for (auto& i : marks)
-    {
-        if (user == i.getIDUser())
-        {
-            if (lesson == i.getIDLesson())
-            {
-                if (!i.isAbsent())
-                {
-                    sum += i.getMark();
-                    counter++;
-                }
-            }
-        }
-    }
-    if (counter == 0 || sum == 0)
-    {
-        system("cls");
-        cout << "User hasn't any marks!" << endl;
-    }
-    else
-    {
-        float avg = (float)sum / counter;
-        system("cls");
-        cout << "Avg user for lesson id " << lesson << " == " << avg << endl;
-    }
-}
-
-void SchoolJournal::countAvg(int user_id, int lesson_id)
+void SchoolJournal::countAvg(int user_id, int lesson_id) const
 {
     int sum = 0;
     int counter = 0;
+    if (user_id >= lastIdUser || lesson_id >= lastIdLesson)
+    {
+        throw invalid_argument("User id or Lesson id can't >= last id!");
+    }
     for (auto& i : marks)
     {
         if (user_id == i.getIDUser())
@@ -768,13 +730,242 @@ void SchoolJournal::countAvg(int user_id, int lesson_id)
     if (counter == 0 || sum == 0)
     {
         system("cls");
-        cout << "User hasn't any marks!" << endl;
+        throw exception("User hasn't any marks!");
     }
     else
     {
         float avg = (float)sum / counter;
         system("cls");
         cout << "Avg user for lesson id " << lesson_id << " == " << avg << endl;
+    }
+}
+
+void SchoolJournal::addUser()
+{
+    char surname[SIZE]{};
+    char name[SIZE]{};
+    int day, month, year;
+    cout << "Enter surname: "; cin >> surname;
+    cout << "Enter name: "; cin >> name;
+    cout << "Enter birthday date(Format: DD MM YYYY): "; cin >> day >> month >> year;
+
+    try
+    {
+        User user(lastIdUser++, surname, name, Date(day, month, year), this->group);
+        users.push_back(user);
+        system("cls");
+        cout << "Added!" << endl;
+    }
+    catch (const std::exception& ex)
+    {
+        cout << "ERROR: " << ex.what() << endl;
+    }
+}
+
+void SchoolJournal::editUser(int user_id)
+{
+    bool userFound = false;
+    if (user_id >= lastIdUser)
+    {
+        throw invalid_argument("User ID can't >= last ID!");
+    }
+    for (auto& i : users)
+    {
+        if (i.getIDUser() == user_id)
+        {
+            i.edit();
+            userFound = true;
+        }
+    }
+    if (!userFound)
+    {
+        throw exception("User not found!");
+    }
+    else
+    {
+        cout << "Edited!" << endl;
+    }
+}
+
+void SchoolJournal::deleteUser(int user_id)
+{
+    bool userFound = false;
+    int counter = 0;
+    for (auto& i : users)
+    {
+        if (i.getIDUser() == user_id)
+        {
+            users.erase(users.begin() + counter);
+            cout << "Deleted!" << endl;
+            userFound = true;
+        }
+        counter++;
+    }
+    if (!userFound)
+    {
+        throw exception("User not found!");
+    }
+}
+
+void SchoolJournal::addLesson()
+{
+    char name[SIZE]{};
+    int day, month, year;
+    cout << "Enter name of lesson: "; cin >> name;
+    cout << "Enter date(Format: DD MM YYYY): "; cin >> day >> month >> year;
+
+    try
+    {
+        Lesson lesson(this->lastIdLesson++, name, this->group, Date(day, month, year));
+        lessons.push_back(lesson);
+        system("cls");
+        cout << "Added!" << endl;
+    }
+    catch (const std::exception& ex)
+    {
+        cout << "ERROR: " << ex.what() << endl;
+    }
+}
+
+void SchoolJournal::editLesson(int lesson_id)
+{
+    bool lessonFounded = false;
+    for (auto& i : lessons)
+    {
+        if (i.getIDLesson() == lesson_id)
+        {
+            i.edit();
+            lessonFounded = true;
+        }
+    }
+    if (!lessonFounded)
+    {
+        throw exception("Lesson not found!");
+    }
+    else
+    {
+        cout << "Edited!" << endl;
+    }
+}
+
+void SchoolJournal::deleteLesson(int lesson_id)
+{
+    bool lessonFounded = false;
+    int counter = 0;
+    if (lesson_id >= lastIdLesson)
+    {
+        throw invalid_argument("Lesson ID can't >= Last ID");
+    }
+    for (auto& i : lessons)
+    {
+        if (i.getIDLesson() == lesson_id)
+        {
+            lessons.erase(lessons.begin() + counter);
+            cout << "Deleted!" << endl;
+            lessonFounded = true;
+        }
+        counter++;
+    }
+    if (!lessonFounded)
+    {
+       throw exception("Lesson not found!");
+    }
+}
+
+void SchoolJournal::newMark()
+{
+    printUsers();
+    int user_id;
+    cout << "Select a user: "; cin >> user_id;
+    system("cls");
+    printLessons();
+    int lesson_id;
+    cout << "Select a lesson: "; cin >> lesson_id;
+    int day, month, year;
+    cout << "Input a date(Format: DD MM YYYY): "; cin >> day >> month >> year;
+    int mark;
+    cout << "Input a mark(input -1 if mark == absent): "; cin >> mark;
+    bool absent = (mark == -1 ? true : false);
+    try
+    {
+        Mark mark_obj(lastIdMark++, user_id, lesson_id, Date(day, month, year), absent, mark);
+        marks.push_back(mark_obj);
+        system("cls");
+        cout << "Added!" << endl;
+    }
+    catch (const std::exception& ex)
+    {
+        cout << "ERROR: " << ex.what() << endl;
+    }
+}
+
+void SchoolJournal::deleteMark(int mark_id)
+{
+    bool markFound = false;
+    int counter = 0;
+    if (mark_id >= lastIdMark)
+    {
+        throw invalid_argument("Mark id can't >= last id!");
+    }
+    for (auto& i : marks)
+    {
+        if (i.getIDMark() == mark_id)
+        {
+            marks.erase(marks.begin() + counter);
+            cout << "Deleted!" << endl;
+            markFound = true;
+        }
+        counter++;
+    }
+    if (!markFound)
+    {
+        throw exception("Mark not found!");
+    }
+}
+
+void SchoolJournal::editMark(int mark_id)
+{
+    if (mark_id >= lastIdMark)
+    {
+        throw invalid_argument("Mark ID can't >= last ID");
+    }
+    bool markFound = false;
+    for (auto& i : marks)
+    {
+        if (i.getIDMark() == mark_id)
+        {
+            i.edit();
+            markFound = true;
+        }
+    }
+    if (!markFound)
+    {
+        throw exception("Mark not found!");
+    }
+    else
+    {
+        cout << "Edited!" << endl;
+    }
+}
+
+void SchoolJournal::printMarks(int user_id, int lesson_id) const
+{
+    if (user_id >= lastIdUser || lesson_id >= lastIdLesson)
+    {
+        throw invalid_argument("User id or lesson id can't >= last id");
+    }
+    int counter = 0;
+    for (auto& i : marks)
+    {
+        if (i.getIDLesson() == lesson_id && i.getIDUser() == user_id)
+        {
+            i.print();
+            counter++;
+        }
+    }
+    if (counter == 0)
+    {
+        throw exception("Nothing marks!");
     }
 }
 

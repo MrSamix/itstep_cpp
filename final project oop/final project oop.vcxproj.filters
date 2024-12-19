@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="final project oop%28Test%29.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SchoolJournal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
